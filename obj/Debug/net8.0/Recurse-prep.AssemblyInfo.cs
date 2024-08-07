@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Recurse-prep")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+4d2d602ec0847f6351e7b9c2122e07aa4ff4430f")]
 [assembly: System.Reflection.AssemblyProductAttribute("Recurse-prep")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Recurse-prep")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

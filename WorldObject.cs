@@ -6,6 +6,9 @@ enum WorldObjectType
     PLAYER,
 }
 
+// TODO: add ID + comparator
+// TODO: add HP
+// TODO: add collision
 class WorldObject
 {
     public WorldObjectType Type;

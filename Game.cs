@@ -11,12 +11,13 @@ class Game
     Point MapSize;
     readonly MapCell[,] Map;
     readonly WorldObject Player;
+    // TODO: create methods for adding and deleting things
     readonly List<WorldObject> Things;
 
     public Game(int mapSizeX, int mapSizeY, Point[] walls)
     {
         MapSize = new Point(mapSizeX, mapSizeY);
-        Map = new MapCell[mapSizeX, mapSizeY];
+        Map = new MapCell[mapSizeY, mapSizeX];
         Things = new List<WorldObject>();
         InitMap(walls);
 
@@ -30,13 +31,14 @@ class Game
     {
         foreach (Point wall in walls)
         {
-            Map[wall.Y, wall.X] = MapCell.Wall;
+            SetMapCell(wall.X, wall.Y, MapCell.Wall);
         }
     }
 
     public void Render()
     {
         Renderer.DrawScreen(MapSize.X, MapSize.Y, Map, Things);
+        // TODO: add GUI
     }
 
     public void HandleInput(ConsoleKey input)
@@ -75,6 +77,7 @@ class Game
         MovePlayer(moveX, moveY);
     }
 
+    // TODO: WorldObject should handle moving
     private void MovePlayer(int dX, int dY)
     {
         int newX = Player.Position.X + dX;
@@ -85,11 +88,26 @@ class Game
             return;
         }
 
-        if (Map[newX, newY] == MapCell.Wall)
+        if (GetMapCell(newX, newY) == MapCell.Wall)
         {
             return;
         }
 
         Player.Position = new Point(newX, newY);
+    }
+
+    // X and Y coordinates are confusing in our situation.
+    // Normally, you would write the coordinates as (X,Y).
+    // But because we're storing the map the same way we are displaying it,
+    // the Y coordinate actually goes before the X when accessing a 
+    // map cell: Map[y,x]
+    private MapCell GetMapCell(int x, int y)
+    {
+        return Map[y, x];
+    }
+
+    private void SetMapCell(int x, int y, MapCell mapCell)
+    {
+        Map[y, x] = mapCell;
     }
 }

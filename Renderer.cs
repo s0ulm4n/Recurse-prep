@@ -6,7 +6,7 @@ struct DisplayCharacter
 
 class Renderer
 {
-    const ConsoleColor FLOOR_COLOR = ConsoleColor.DarkBlue; // ConsoleColor.Gray;
+    const ConsoleColor FLOOR_COLOR = ConsoleColor.DarkBlue;
     const ConsoleColor WALL_COLOR = ConsoleColor.White;
     const ConsoleColor PLAYER_COLOR = ConsoleColor.Yellow;
 
@@ -70,7 +70,7 @@ class Renderer
                 output.Color = PLAYER_COLOR;
                 break;
             default:
-                throw new Exception($"Unexpected world object type: {objectType}");
+                throw new ArgumentException($"Unexpected world object type: {objectType}");
         }
 
         return output;

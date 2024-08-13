@@ -1,2 +1,12 @@
 /bin
 /obj/Debug
+bin/Debug/net8.0/Recurse-prep.dll
+bin/Debug/net8.0/Recurse-prep.pdb
+obj/Debug/net8.0/Recurse-prep.AssemblyInfo.cs
+obj/Debug/net8.0/Recurse-prep.AssemblyInfoInputs.cache
+obj/Debug/net8.0/Recurse-prep.csproj.CoreCompileInputs.cache
+obj/Debug/net8.0/Recurse-prep.csproj.FileListAbsolute.txt
+obj/Debug/net8.0/Recurse-prep.dll
+obj/Debug/net8.0/Recurse-prep.pdb
+obj/Debug/net8.0/ref/Recurse-prep.dll
+obj/Debug/net8.0/refint/Recurse-prep.dll

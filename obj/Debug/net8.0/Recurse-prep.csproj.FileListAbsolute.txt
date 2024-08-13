@@ -12,3 +12,4 @@
 /Users/borisvorobev/Documents/GitHub/Recurse-prep/obj/Debug/net8.0/Recurse-prep.pdb
 /Users/borisvorobev/Documents/GitHub/Recurse-prep/obj/Debug/net8.0/Recurse-prep.genruntimeconfig.cache
 /Users/borisvorobev/Documents/GitHub/Recurse-prep/obj/Debug/net8.0/ref/Recurse-prep.dll
+/Users/borisvorobev/Documents/GitHub/Recurse-prep/obj/Debug/net8.0/Recurse-prep.sourcelink.json

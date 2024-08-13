@@ -8,17 +8,21 @@ enum MapCell
 
 class Game
 {
-    Point PlayerPos;
     Point MapSize;
     readonly MapCell[,] Map;
+    readonly WorldObject Player;
+    readonly List<WorldObject> Things;
 
     public Game(int mapSizeX, int mapSizeY, Point[] walls)
     {
         MapSize = new Point(mapSizeX, mapSizeY);
         Map = new MapCell[mapSizeX, mapSizeY];
+        Things = new List<WorldObject>();
         InitMap(walls);
 
-        PlayerPos = new Point(0, 0);
+        // TODO: handle invalid player position
+        Player = new WorldObject(WorldObjectType.PLAYER, new Point(0, 0));
+        Things.Add(Player);
     }
 
     // TODO: add openable doors!
@@ -30,39 +34,9 @@ class Game
         }
     }
 
-    // TODO: add colors!
     public void Render()
     {
-        Char[,] buffer = new Char[MapSize.Y, MapSize.X];
-
-        Console.Clear();
-
-        for (int y = 0; y < MapSize.Y; y++)
-        {
-            for (int x = 0; x < MapSize.X; x++)
-            {
-                if (Map[y, x] == MapCell.Wall)
-                {
-                    buffer[y, x] = '#';
-                }
-                else
-                {
-                    buffer[y, x] = '.';
-                }
-            }
-        }
-
-        // TODO: handle invalid player position
-        buffer[PlayerPos.Y, PlayerPos.X] = '@';
-
-        for (int y = 0; y < MapSize.Y; y++)
-        {
-            for (int x = 0; x < MapSize.X; x++)
-            {
-                Console.Write(buffer[y, x]);
-            }
-            Console.WriteLine();
-        }
+        Renderer.DrawScreen(MapSize.X, MapSize.Y, Map, Things);
     }
 
     public void HandleInput(ConsoleKey input)
@@ -103,8 +77,8 @@ class Game
 
     private void MovePlayer(int dX, int dY)
     {
-        int newX = PlayerPos.X + dX;
-        int newY = PlayerPos.Y + dY;
+        int newX = Player.Position.X + dX;
+        int newY = Player.Position.Y + dY;
 
         if (newX < 0 || newX >= MapSize.X || newY < 0 || newY >= MapSize.Y)
         {
@@ -116,6 +90,6 @@ class Game
             return;
         }
 
-        PlayerPos = new Point(newX, newY);
+        Player.Position = new Point(newX, newY);
     }
 }

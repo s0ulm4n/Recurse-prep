@@ -9,6 +9,7 @@ class Renderer
     const ConsoleColor FLOOR_COLOR = ConsoleColor.DarkBlue;
     const ConsoleColor WALL_COLOR = ConsoleColor.White;
     const ConsoleColor PLAYER_COLOR = ConsoleColor.Yellow;
+    const ConsoleColor DOOR_COLOR = ConsoleColor.DarkRed;
 
     public static void DrawScreen(int sizeX, int sizeY, MapCell[,] map, List<WorldObject> things)
     {
@@ -53,24 +54,44 @@ class Renderer
 
     private static void DrawThings(List<WorldObject> things, DisplayCharacter[,] buffer)
     {
+        // TODO: figure out rendering order in case things occupy the same position
         foreach (WorldObject thing in things)
         {
-            buffer[thing.Position.Y, thing.Position.X] = DrawWorldObject(thing.Type);
+            buffer[thing.Position.Y, thing.Position.X] = DrawWorldObject(thing);
         }
     }
 
-    private static DisplayCharacter DrawWorldObject(WorldObjectType objectType)
+    private static DisplayCharacter DrawWorldObject(WorldObject thing)
     {
         DisplayCharacter output;
 
-        switch (objectType)
+        switch (thing.Type)
         {
             case WorldObjectType.PLAYER:
                 output.Symbol = '@';
                 output.Color = PLAYER_COLOR;
                 break;
+            case WorldObjectType.DOOR:
+                Door? door = thing as Door;
+                if (door is not null)
+                {
+                    if (door.IsOpen)
+                    {
+                        output.Symbol = '/';
+                    }
+                    else
+                    {
+                        output.Symbol = '+';
+                    }
+                    output.Color = DOOR_COLOR;
+                }
+                else
+                {
+                    throw new ArgumentException($"WorldObject with type DOOR was not a door!");
+                }
+                break;
             default:
-                throw new ArgumentException($"Unexpected world object type: {objectType}");
+                throw new ArgumentException($"Unexpected world object type: {thing.Type}");
         }
 
         return output;

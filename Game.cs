@@ -18,15 +18,15 @@ class Game
     {
         MapSize = new Point(mapSizeX, mapSizeY);
         Map = new MapCell[mapSizeY, mapSizeX];
-        Things = new List<WorldObject>();
         InitMap(walls);
 
+        Things = new List<WorldObject>();
+        Things.Add(new Door(WorldObjectType.DOOR, new Point(3, 3)));
         // TODO: handle invalid player position
         Player = new WorldObject(WorldObjectType.PLAYER, new Point(0, 0));
         Things.Add(Player);
     }
 
-    // TODO: add openable doors!
     private void InitMap(Point[] walls)
     {
         foreach (Point wall in walls)
@@ -91,6 +91,15 @@ class Game
         if (GetMapCell(newX, newY) == MapCell.Wall)
         {
             return;
+        }
+
+        foreach (WorldObject thing in Things)
+        {
+            if (thing.Position.X == newX && thing.Position.Y == newY && !thing.PassThrough)
+            {
+                thing.OnCollision(Player);
+                return;
+            }
         }
 
         Player.Position = new Point(newX, newY);
